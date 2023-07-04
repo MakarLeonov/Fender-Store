@@ -63,7 +63,7 @@
 
                 <div class="group shipping">
                     <div class="subtitle">Shipping:</div>
-                    <div class="cost">free</div>
+                    <div class="cost">free<span class="material-symbols-outlined" title="If the total cost exceeds 1000 dollars, delivery is free of charge">info</span></div>
                 </div>
 
                 <div class="group total">
@@ -214,6 +214,12 @@
         font-size: 32px;
         font-family: Raleway;
         font-weight: 400;
+    }
+
+    .cost > span {
+        font-size: 17px;
+        margin-left: 2px;
+        cursor: help;
     }
 
     .shipping {

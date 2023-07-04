@@ -1,156 +1,92 @@
-<script setup>
-import { ref } from 'vue'
-import MySelect from '../components/UI/MySelect.vue';
-
-    const types = [
-        'All types',
-        'Only Electric',
-        'Only Acustic',
-    ]
-
-    const models = [
-        'All models',
-        'Stratocaster',
-        'Telecaster',
-        'Jaguar',
-        'Jazzmaster',
-        'Lead',
-        'Duo-Sonic',
-        'Mustang',
-    ]
-
-    const stoks = [
-        'All products',
-        'Only in stok',
-        'All products',
-    ]
-
-
-    const type = ref('')
-    const model = ref('')
-    const stok = ref('')
-
-</script>
-
 <template>
-    <main>
-        <!-- <div class="fon"></div> -->
-        <div class="container">
-            <p class="title">Catalog</p>
-            <div class="filters">
-                <my-select :options="types" @changeOption="(option) => type = option" class="select"/> 
-                <my-select :options="models" @changeOption="(option) => model = option" class="select"/> 
-                <my-select :options="stoks" @changeOption="(option) => stok = option" class="select"/>
-                <input type="text" name="name" placeholder="Your name...">
-            </div>
+    <div>
+        <p class="title">Favourites</p>
 
-
-            <div class="guitar_list">
+        <div class="guitar_list">
                 <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <img src="../../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
                     <div class="cart_info">
                         <p class="cart_p">Cost: $1000</p>
                         <p class="cart_p">In stok: 4</p>
                     </div>
                     <div class="cart_buttons">
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Delete from <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
                 <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <img src="../../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
                     <div class="cart_info">
                         <p class="cart_p">Cost: $1000</p>
                         <p class="cart_p">In stok: 4</p>
                     </div>
                     <div class="cart_buttons">
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Delete from <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
                 <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <img src="../../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
                     <div class="cart_info">
                         <p class="cart_p">Cost: $1000</p>
                         <p class="cart_p">In stok: 4</p>
                     </div>
                     <div class="cart_buttons">
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Delete from <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </main>
+    </div>
 </template>
 <script>
 export default {
     
 }
 </script>
-<style scoped>
-
-    main {
-        width: 100%;
-    }
-    .fon {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("../assets/images/guiter-for-bg-repiat.jpg");
-        background-repeat: repeat;
-        background-size: 5% auto;
-        opacity: .1; 
-        z-index: 0;
-    }
-    .title {
+<style lang="css" scoped>
+     .title {
         color: rgba(50, 50, 50, 0.98);
         text-align: left;
         font-size: 36px;
         font-family: 'Raleway', sans-serif;
         font-weight: 700;
-        /* margin: 100px 0 20px; */
+        margin-bottom: 20px;
     }
 
-    .container {
-        padding-top: 140px;
-        width: 70%;
-        margin: 0 auto;
-        z-index: 10;
+    .p {
+        color: rgba(50, 50, 50, 0.98);
+        text-align: left;
+        font-size: 20px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 400;
+        margin-bottom: 10px;
     }
 
-    .filters {
-        margin: 10px 0 20px;
-        display: flex;
-        gap: 10px;
-    }
-
-    input {
-        width: 300px;
-        display: flex;
-        height: 55px;
-        background: #fff;
-        border: 1px solid #5A3015;
-        padding: 20px;
+    /* button {
+        width: 196px;
+        height: 52px;
+        flex-shrink: 0;
         border-radius: 7px;
-        align-items: center;
-        cursor: pointer;
-        justify-content: space-between;
-        transition: all .2s ease-out;
+        border: 2px solid #5A3015;
+        background: #FFF;
         color: #5A3015;
-        font-size: 22px;
+        text-align: center;
+        font-size: 18px;
         font-family: Raleway;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .2s ease-out;
     }
 
-    ::-webkit-input-placeholder { color:#5A3015; }
-    ::-moz-placeholder { color:#5A3015; }
-    :-ms-input-placeholder { color:#5A3015; } 
-    input:-moz-placeholder { color:#5A3015; }
+    button:hover {
+        background: #5A3015;
+        color: #fff;
+        transition: all .2s ease-in;
+    } */
 
     .guitar_list {
         display: flex;
