@@ -17,6 +17,10 @@
                 <div class="cart">
                     <img src="../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_info">
+                        <p class="cart_p">Cost: $1000</p>
+                        <p class="cart_p">In stok: 4</p>
+                    </div>
                     <div class="cart_buttons">
                         <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
@@ -25,6 +29,10 @@
                 <div class="cart">
                     <img src="../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_info">
+                        <p class="cart_p">Cost: $1000</p>
+                        <p class="cart_p">In stok: 4</p>
+                    </div>
                     <div class="cart_buttons">
                         <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
@@ -33,11 +41,16 @@
                 <div class="cart">
                     <img src="../assets//guitars/mustang.jpg" alt="mustang">
                     <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_info">
+                        <p class="cart_p">Cost: $1000</p>
+                        <p class="cart_p">In stok: 4</p>
+                    </div>
                     <div class="cart_buttons">
                         <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
+                
             </div>
             <p @click="this.$router.push('/catalog')" class="see_more_p">See more our guitars...</p>
         </section>
@@ -119,12 +132,29 @@
         font-size: 24px;
         font-family: Raleway;
         font-weight: 400;
+        /* margin-bottom: 5px; */
+    }
+
+    .cart_info {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 7px;
+
+    }
+
+    .cart_p {
+        color: #000;
+        font-size: 22px;
+        font-family: Raleway;
+        font-weight: 500;
+        margin-top: 3px;
+
     }
     .cart_buttons {
         width: 100%;
         display: flex;
         gap: 10px;
-        margin-top: 15px;
+        margin-top: 10px;
     }
     .cart_button {
         text-align: center;
