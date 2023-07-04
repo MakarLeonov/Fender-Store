@@ -28,6 +28,7 @@
         background-image: url("../assets/images/foote_image.png");
         background-size: cover;
         position: relative;
+        margin-top: 30px;
     }
 
     .wrapper {

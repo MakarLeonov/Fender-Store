@@ -6,10 +6,40 @@
     <main>
         <section class="title_section" />
         <section class="advantages">
-            <p class="title">Почему музыканты выбирают именно Fender?</p>
+            <p class="title">Why do musicians choose Fender?</p>
             <p class="advantages_p">
-                Корпорация Fender Musical Instruments является крупнейшим производителем гитар в мире. В настоящее время компания выпускает бесчисленное количество инструментов от лимитированных именных моделей до бренда начального уровня Squier.
-            </p>
+                Fender Musical Instruments Corporation is the largest guitar manufacturer in the world. Currently, the company produces countless instruments from limited name models to the entry-level brand Squier.            </p>
+        </section>
+        <img src="../assets//images//side_Image.png" alt="guitar`s head" class="side_image">
+        <section class="popular_guitars">
+            <p class="title">Popular guitars</p>
+            <div class="guitar_list">
+                <div class="cart">
+                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_buttons">
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
+                    </div>
+                </div>
+                <div class="cart">
+                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_buttons">
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
+                    </div>
+                </div>
+                <div class="cart">
+                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                    <p class="guitar_name">Fender Squire Mustang</p>
+                    <div class="cart_buttons">
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
+                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
+                    </div>
+                </div>
+            </div>
+            <p @click="this.$router.push('/catalog')" class="see_more_p">See more our guitars...</p>
         </section>
     </main>
 </template>
@@ -33,7 +63,7 @@
 
     .advantages {
         width: 1305px;
-        margin: 0 auto;;
+        margin: 0 auto;
     }
     .advantages_p {
         color: #000;
@@ -44,4 +74,93 @@
         font-weight: 400;
         line-height: normal;
     }
+
+    .side_image {
+        display: block;
+        margin-left: auto;
+        margin-bottom: -200px;
+    }
+
+    .popular_guitars {
+        margin-top: -200px;
+        width: 1305px;
+        margin: 0 auto;
+    }
+
+    .guitar_list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 50px 0 0;
+    }
+    .cart {
+        width: 410px;
+        flex-shrink: 0;
+        border-radius: 15px;
+        background: #FFF;
+        box-shadow: 0px 5px 15px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        transition: all .2s ease-out;
+        margin-bottom: 30px;
+    }
+
+    .cart:hover {
+        box-shadow: 0px 5px 15px 10px rgba(0, 0, 0, 0.08);
+        transition: all .2s ease-in;
+    }
+
+    .cart > img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .guitar_name {
+        color: #000;
+        font-size: 24px;
+        font-family: Raleway;
+        font-weight: 400;
+    }
+    .cart_buttons {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .cart_button {
+        text-align: center;
+        font-size: 18px;
+        font-family: Raleway;
+        font-weight: 600;
+        border-radius: 7px;
+        border: 2px solid #7C6157;
+        
+        width: 180px;
+        height: 52px;
+        flex-shrink: 0;
+        cursor: pointer;
+        background: #fff;
+        color: #7C6157;
+        transition: all .2s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .cart_button:hover {
+        background: #5A3015;
+        border: 2px solid #5A3015;
+        color: #fff;
+        transition: all .2s ease-in;
+    }
+
+    .see_more_p {
+        color: #524439;
+        text-align: center;
+        font-size: 24px;
+        font-family: Raleway;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
 </style>

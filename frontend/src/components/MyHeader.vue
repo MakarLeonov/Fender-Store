@@ -32,8 +32,6 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* padding-right: 150px;
-        padding-left: 25px; */
         padding: 0 70px 0 25px;
         z-index: 5;
 
