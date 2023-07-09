@@ -1,20 +1,34 @@
+<script setup>
+import { ProductsStore } from "../store/store"
+import { computed, ref } from 'vue'
+
+const store = ProductsStore()
+
+const total = computed(() => {
+    return store.productList.reduce((sum, product) => sum + product.cost, 0);
+})
+
+const shipping = computed(() => {
+    return (total.value >= 2000) ? 'Free' : '$70' 
+})
+</script>
+
 <template>
     <main>
         <p class="title">My Cart</p>
         <div class="sections">
             <section>
                 
-                <div class="cart_item">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
+                <div class="cart_item" v-for="product in store.productList" :key="product.id">
+                    <img :src="'src/assets/guitars/' + product.image" alt="mustang">
                     <div class="cart_info">
-                        <p class="cart_title">Fender Squire Mustang</p>
+                        <p class="cart_title">{{ product.name }}</p>
                         <p class="product_info">
-                            Born in Corona, California, the 24”-scale American Performer Mustang delivers the exceptional tone and feel you, along with a unique feel and new player-oriented features that make it even more inspiring to play.
-                        </p>
+                            {{ product.description }}                        </p>
                         <div class="additional_info">
-                            <p>Cost: $1000</p>
-                            <div>Colour: <div class="colour"></div></div>
-                            <p>In stoke: 2</p>
+                            <p>Cost: ${{ product.cost }}</p>
+                            <div>Colour: <div class="colour" :style="{background: product.color.color}"></div></div>
+                            <p>In stoke: {{ product.in_stok }}</p>
                         </div>
                         
                         <div class="buttons">
@@ -23,52 +37,24 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="cart_item">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
-                    <div class="cart_info">
-                        <p class="cart_title">Fender Squire Mustang</p>
-                        <p class="product_info">
-                            Born in Corona, California, the 24”-scale American Performer Mustang delivers the exceptional tone and feel you, along with a unique feel and new player-oriented features that make it even more inspiring to play.
-                        </p>
-                        <div class="additional_info">
-                            <p>Cost: $1000</p>
-                            <div>Colour: <div class="colour"></div></div>
-                            <p>In stoke: 2</p>
-                        </div>
-                        
-                        <div class="buttons">
-                            <button>Delete from cart</button>
-                            <button>Change the order</button>
-                        </div>
-                    </div>
-                </div> 
 
             </section>
             <aside>
                 <p class="aside_title">Order Summury</p>
                 <p class="subtitle">Product list:</p>
-                <div class="group">
-                    <div class="product">- Fender Squire Mustung :</div>
-                    <div class="cost">$1000</div>
-                </div>
-                <div class="group">
-                    <div class="product">- Fender Squire Mustung :</div>
-                    <div class="cost">$1000</div>
-                </div>
-                <div class="group">
-                    <div class="product">- Fender Squire Mustung :</div>
-                    <div class="cost">$1000</div>
+                <div class="group" v-for="product in store.productList" :key="product.id">
+                    <div class="product">- {{ product.name }} :</div>
+                    <div class="cost">${{ product.cost }}</div>
                 </div>
 
                 <div class="group shipping">
                     <div class="subtitle">Shipping:</div>
-                    <div class="cost">free<span class="material-symbols-outlined" title="If the total cost exceeds 1000 dollars, delivery is free of charge">info</span></div>
+                    <div class="cost">{{ shipping }}<span class="material-symbols-outlined" title="If the total cost exceeds 1000 dollars, delivery is free of charge">info</span></div>
                 </div>
 
                 <div class="group total">
                     <div class="total_p">Total:</div>
-                    <div class="total_cost">$1000</div>
+                    <div class="total_cost">${{ total }}</div>
                 </div>
 
                 <button class="aside_button">Go to payment</button>
@@ -148,7 +134,7 @@
         height: 26px;
         flex-shrink: 0;
         border-radius: 19px;
-        background: #780104;
+        /* background: #780104; */
         margin-left: 5px;
     }
 

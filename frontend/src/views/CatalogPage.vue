@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import MySelect from '../components/UI/MySelect.vue';
+import { ProductsStore } from '../store/store'
+
+    const store = ProductsStore()
 
     const types = [
         'All types',
@@ -44,46 +47,22 @@ import MySelect from '../components/UI/MySelect.vue';
                 <input type="text" name="name" placeholder="Your name...">
             </div>
 
-
             <div class="guitar_list">
-                <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
-                    <p class="guitar_name">Fender Squire Mustang</p>
+                
+                <div class="cart" v-for="product in store.productList" :key="product.id">
+                    <img :src="'src/assets//guitars/' + product.image" alt="mustang">
+                    <p class="guitar_name">{{ product.name }}</p>
                     <div class="cart_info">
-                        <p class="cart_p">Cost: $1000</p>
-                        <p class="cart_p">In stok: 4</p>
+                        <p class="cart_p">Cost: ${{ product.cost }}</p>
+                        <p class="cart_p">In stok: {{ product.in_stok }}</p>
                     </div>
                     <div class="cart_buttons">
                         <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
                         <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
-                <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
-                    <p class="guitar_name">Fender Squire Mustang</p>
-                    <div class="cart_info">
-                        <p class="cart_p">Cost: $1000</p>
-                        <p class="cart_p">In stok: 4</p>
-                    </div>
-                    <div class="cart_buttons">
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
-                    </div>
-                </div>
-                <div class="cart">
-                    <img src="../assets//guitars/mustang.jpg" alt="mustang">
-                    <p class="guitar_name">Fender Squire Mustang</p>
-                    <div class="cart_info">
-                        <p class="cart_p">Cost: $1000</p>
-                        <p class="cart_p">In stok: 4</p>
-                    </div>
-                    <div class="cart_buttons">
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
-                    </div>
-                </div>
-            </div>
 
+            </div>
         </div>
     </main>
 </template>
@@ -154,7 +133,8 @@ export default {
 
     .guitar_list {
         display: flex;
-        justify-content: space-between;
+        /* justify-content: space-between; */
+        gap: 37px;
         flex-wrap: wrap;
     }
     .cart {
