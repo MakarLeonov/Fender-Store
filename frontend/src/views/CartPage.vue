@@ -1,15 +1,19 @@
 <script setup>
 import { ProductsStore } from "../store/store"
-import { computed, ref } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const store = ProductsStore()
+
+onMounted(() => {
+    store.getProducts()
+})
 
 const total = computed(() => {
     return store.productList.reduce((sum, product) => sum + product.cost, 0);
 })
 
 const shipping = computed(() => {
-    return (total.value >= 2000) ? 'Free' : '$70' 
+    return (total.value >= 1000) ? 'Free' : '$70' 
 })
 </script>
 
@@ -23,8 +27,7 @@ const shipping = computed(() => {
                     <img :src="'src/assets/guitars/' + product.image" alt="mustang">
                     <div class="cart_info">
                         <p class="cart_title">{{ product.name }}</p>
-                        <p class="product_info">
-                            {{ product.description }}                        </p>
+                        <p class="product_info">{{ product.description }}</p>
                         <div class="additional_info">
                             <p>Cost: ${{ product.cost }}</p>
                             <div>Colour: <div class="colour" :style="{background: product.color.color}"></div></div>
@@ -33,7 +36,7 @@ const shipping = computed(() => {
                         
                         <div class="buttons">
                             <button>Delete from cart</button>
-                            <button>Change the order</button>
+                            <!-- <button>Change the order</button> -->
                         </div>
                     </div>
                 </div>
@@ -167,7 +170,7 @@ const shipping = computed(() => {
 
     aside {
         width: 28%;
-        height: 384px;
+        height: fit-content;
         flex-shrink: 0;
         border-radius: 15px;
         background: #FFF;

@@ -1,37 +1,64 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, reactive, computed } from 'vue'
 import MySelect from '../components/UI/MySelect.vue';
 import { ProductsStore } from '../store/store'
 
     const store = ProductsStore()
 
-    const types = [
-        'All types',
-        'Only Electric',
-        'Only Acustic',
-    ]
+    onMounted(() => {
+        store.getProducts()
+        store.getTypes()
+        store.getModels()
+    })
 
-    const models = [
-        'All models',
-        'Stratocaster',
-        'Telecaster',
-        'Jaguar',
-        'Jazzmaster',
-        'Lead',
-        'Duo-Sonic',
-        'Mustang',
-    ]
+    const type = ref('All types')
+    const model = ref('All models')
+    const stock = ref('All products')
+    const search = ref('');
 
     const stoks = [
         'All products',
-        'Only in stok',
-        'All products',
+        'In stock',
+        'Out of stock',
     ]
 
+    const sortedByType = computed(() => {
+        if (type.value === 'All types') {
+            return store.productList;
+        } else {
+            return store.productList.filter((el) => {
+                return (el.type.type === type.value);
+            })
+        }
+    })
 
-    const type = ref('')
-    const model = ref('')
-    const stok = ref('')
+    const sortedByTypeAndModel = computed(() => {
+        if (model.value === 'All models') {
+            return sortedByType.value;
+        } else {
+            return sortedByType.value.filter((el) => {
+                return (el.model.model === model.value);
+            })
+        }
+    })
+
+    const sortedByParams = computed(() => {
+        if (stock.value == 'All products') {
+            return sortedByTypeAndModel.value;
+        } else if(stock.value == 'In stock') {
+            return sortedByTypeAndModel.value.filter((el) => (el.in_stok > 0))
+        } else {
+            return sortedByTypeAndModel.value.filter((el) => (el.in_stok === 0))
+        }
+    }) 
+
+    const sortedByParamsAndSearch = computed(() => {
+        return sortedByParams.value.filter((el) => {
+            return el.name.toUpperCase().includes(search.value.toUpperCase())
+        })
+    })
+
+    
 
 </script>
 
@@ -41,16 +68,16 @@ import { ProductsStore } from '../store/store'
         <div class="container">
             <p class="title">Catalog</p>
             <div class="filters">
-                <my-select :options="types" @changeOption="(option) => type = option" class="select"/> 
-                <my-select :options="models" @changeOption="(option) => model = option" class="select"/> 
-                <my-select :options="stoks" @changeOption="(option) => stok = option" class="select"/>
-                <input type="text" name="name" placeholder="Your name...">
+                <my-select :options="store.types" @changeOption="(option) => type = option" class="select"/>
+                <my-select :options="store.models" @changeOption="(option) => model = option" class="select"/> 
+                <my-select :options="stoks" @changeOption="(option) => stock = option" class="select"/>
+                <input type="text" v-model="search" placeholder="Search..."> {{ search }}
             </div>
 
             <div class="guitar_list">
                 
-                <div class="cart" v-for="product in store.productList" :key="product.id">
-                    <img :src="'src/assets//guitars/' + product.image" alt="mustang">
+                <div class="cart" v-for="product in sortedByParamsAndSearch" :key="product.id">
+                    <img :src="'src/assets//guitars/' + product.image" :alt="product.name">
                     <p class="guitar_name">{{ product.name }}</p>
                     <div class="cart_info">
                         <p class="cart_p">Cost: ${{ product.cost }}</p>
@@ -66,11 +93,6 @@ import { ProductsStore } from '../store/store'
         </div>
     </main>
 </template>
-<script>
-export default {
-    
-}
-</script>
 <style scoped>
 
     main {
@@ -99,6 +121,7 @@ export default {
     .container {
         padding-top: 140px;
         width: 70%;
+        min-height: 700px;
         margin: 0 auto;
         z-index: 10;
     }
@@ -134,7 +157,7 @@ export default {
     .guitar_list {
         display: flex;
         /* justify-content: space-between; */
-        gap: 37px;
+        gap: 33px;
         flex-wrap: wrap;
     }
     .cart {
@@ -145,7 +168,7 @@ export default {
         box-shadow: 0px 5px 15px 10px rgba(0, 0, 0, 0.05);
         padding: 20px;
         transition: all .2s ease-out;
-        margin-bottom: 30px;
+        margin-bottom: 7px;
     }
 
     .cart:hover {

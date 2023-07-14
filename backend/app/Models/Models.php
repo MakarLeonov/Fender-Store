@@ -9,6 +9,8 @@ class Models extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['model'];
+
     public function products() {
         return $this->hasOne(Products::class);
     }

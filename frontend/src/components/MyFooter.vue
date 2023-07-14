@@ -1,13 +1,46 @@
+<script setup>
+import axios from 'axios';
+import { ref } from 'vue'
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+const userName = ref('')
+const showMessage = ref(false)
+
+
+function sendMessage() {
+    axios.post('http://127.0.0.1:8000/api/user_questions', {
+        name: name.value,
+        email: email.value,
+        message: message.value,
+    })
+        .then((response) => {
+            userName.value = response.data.data.name
+            showMessage.value = true;
+            setTimeout(() => {
+            showMessage.value = false;
+            }, 3000)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    name.value = ''
+    email.value = ''
+    message.value = ''
+}
+
+</script>
 <template>
     <footer>
         <div class="wrapper">
             <img src="../assets/images/white_logo.png" v-if="this.$route.path === '/'" alt="fender logo">
             <p class="footer_title">Do you have a question?</p>
-            <p class="footer_p">Team of professional will help you</p>
-            <form>
-                <input type="text" name="name" placeholder="Your name...">
-                <input type="text" name="email" placeholder="Your email...">
-                <textarea name="message" placeholder="Your message..."></textarea>
+            <p class="footer_p">Team of professionals will help you</p>
+            <form @submit.prevent="sendMessage()">
+                <input type="text" name="name" v-model.trim="name" placeholder="Your name..."> 
+                <input type="text" name="email" v-model.trim="email" placeholder="Your email...">
+                <textarea name="message" placeholder="Your message..." v-model.trim="message"></textarea>
                 <button>Send Message</button>
             </form>
             <div class="developed">
@@ -16,6 +49,11 @@
                     <img src="../assets/images/GitHubLogo.png" alt="GitHub">    
                     GitHub
                 </a>
+            </div>
+            <div class="message_fon" v-if="showMessage">
+                <div class="message">
+                    <p>Thanks {{ userName }}! We will send the answer on your email.</p>
+                </div>
             </div>
         </div>
     </footer>
@@ -125,4 +163,31 @@
         align-items: center;
         gap: 5px;
     }
+
+    .message_fon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.15);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .message {
+        width: 350px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+
+        font-size: 24px;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 400;
+        margin-top: 5px;
+    }
+
 </style>

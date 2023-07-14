@@ -9,7 +9,7 @@
 
         <transition name="slide-fade">
             <ul :class="['options', (isActive) ? 'active' : '']">
-                <li class="option"
+                <li :class="['option', (option === optionTitle) ? 'current' : '']"
                     v-for="(option, index) in options" :key="index"
                     @click="isActive = !isActive, optionTitle = option, changeOption(option)">
                     <i class="bx bxl-github" style="color: #171515;"></i>
@@ -28,7 +28,7 @@ const emit = defineEmits(['changeOption'])
 const props = defineProps(['options'])
 
 const isActive = ref(false)
-const optionTitle = ref(props.options[0])
+const optionTitle = props.options[0]
 
 function changeOption(value) {
     emit('changeOption', value)
@@ -37,7 +37,7 @@ function changeOption(value) {
 
 <style lang="css" scoped>
 .select-menu .select-btn{
-    width: 250px;
+    width: 260px;
     display: flex;
     height: 55px;
     background: #fff;
@@ -77,7 +77,7 @@ function changeOption(value) {
 }
 .select-menu.active .options{
     
-    width: 250px;
+    width: 260px;
     display: block;
 }
 
@@ -95,12 +95,16 @@ function changeOption(value) {
     font-size: 20px;
     font-family: Raleway;
 }
-.options .option:hover{
-    background: #F2F2F2;
+.options .option:hover {
     background: #5A3015;
     color: #F2F2F2;
     
     transition: all .2s ease-in;
+}
+
+.current {
+    background: #5A3015 !important;
+    color: #F2F2F2 !important;
 }
 .option i{
     font-size: 25px;
