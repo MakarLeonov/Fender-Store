@@ -7,6 +7,7 @@ use App\Http\Controllers\TypesController;
 use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\ColorsController;
 use App\Http\Controllers\UserQuestionsController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Http\Controllers\UserQuestionsController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/products', [ProductsController::class, 'index']);
 Route::get('/products/{id}', [ProductsController::class, 'show']);
@@ -47,3 +48,8 @@ Route::delete('/colors/{id}', [ColorsController::class, 'destroy']);
 Route::get('/user_questions', [UserQuestionsController::class, 'index']);
 Route::post('/user_questions', [UserQuestionsController::class, 'store']);
 Route::delete('/user_questions/{id}', [UserQuestionsController::class, 'destroy']);
+
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

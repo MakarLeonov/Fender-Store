@@ -2,7 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import MainPage from "../views/MainPage.vue"
 import CatalogPage from "../views/CatalogPage.vue"
 import CartPage from "../views/CartPage.vue"
-import LoginPage from "../views/LoginPage.vue"
+import Login from "../views/Login.vue"
+import Register from "../views/Register.vue"
 import UserPage from "../views/UserPage.vue"
 import Personal from "../components/UserPage/Personal.vue"
 import Favourites from "../components/UserPage/Favourites.vue"
@@ -28,7 +29,12 @@ const router = createRouter({
       {
         path: '/login',
         name: 'login',
-        component: LoginPage
+        component: Login
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: Register
       },
       {
         path: '/user',

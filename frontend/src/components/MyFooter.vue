@@ -21,13 +21,14 @@ function sendMessage() {
             setTimeout(() => {
             showMessage.value = false;
             }, 3000)
+            
+            name.value = ''
+            email.value = ''
+            message.value = ''
         })
         .catch((error) => {
             console.log(error)
         })
-    name.value = ''
-    email.value = ''
-    message.value = ''
 }
 
 </script>

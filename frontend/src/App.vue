@@ -18,4 +18,8 @@ import MyFooter from './components/MyFooter.vue';
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  background: #646464;
+}
 </style>
