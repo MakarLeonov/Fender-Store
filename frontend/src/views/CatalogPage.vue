@@ -1,7 +1,8 @@
 <script setup>
-import { ref, onMounted, reactive, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import MySelect from '../components/UI/MySelect.vue';
 import { ProductsStore } from '../store/store'
+import axios from 'axios';
 
     const store = ProductsStore()
 
@@ -58,6 +59,20 @@ import { ProductsStore } from '../store/store'
         })
     })
 
+
+    function addToCart(product_id) {
+        axios.post('http://127.0.0.1:8000/api/add_product', {
+            user_id: JSON.parse(localStorage.user).id,
+            product_id: product_id,
+            amount: 1
+        })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
     
 
 </script>
@@ -85,7 +100,7 @@ import { ProductsStore } from '../store/store'
                     </div>
                     <div class="cart_buttons">
                         <button class="cart_button">Add to <span class="material-symbols-outlined">star</span></button>
-                        <button class="cart_button">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
+                        <button class="cart_button" @click="addToCart(product.id)">Add to <span class="material-symbols-outlined">shopping_cart</span></button>
                     </div>
                 </div>
 
@@ -106,8 +121,8 @@ import { ProductsStore } from '../store/store'
         background-image: url("../assets/images/guiter-for-bg-repiat.jpg");
         background-repeat: repeat;
         background-size: 5% auto;
-        opacity: .1; 
-        z-index: 0;
+        opacity: .08; 
+        z-index: -100;
     }
     .title {
         color: rgba(50, 50, 50, 0.98);

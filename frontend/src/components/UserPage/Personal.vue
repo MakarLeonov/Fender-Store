@@ -1,19 +1,25 @@
+<script setup>
+import { onMounted } from 'vue'
+import { ProductsStore } from '/src/store/store'
+
+const store = ProductsStore()
+
+onMounted(() => {
+    store.serUser()
+})
+
+</script>
 <template>
     <div>
         <p class="title">Personal Accaunt</p>
             
-        <p class="p">My login: Makar Leonov</p>
-        <p class="p">My email: gamemakarena@gmail.com</p>
-        <p class="p">My password: **********</p>
+        <p class="p">My login: {{ store.user.name }}</p>
+        <p class="p">My email: {{ store.user.email }}</p>
+        <p class="p">My role: {{ (store.user.is_admin === 1) ? 'admin' : 'user' }}</p>
         
         <button class="aside_button">Edit personal data</button>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
 <style lang="css" scoped>
      .title {
         color: rgba(50, 50, 50, 0.98);

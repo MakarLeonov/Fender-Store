@@ -19,7 +19,7 @@ import MyFooter from './components/MyFooter.vue';
   box-sizing: border-box;
 }
 
-body {
+/* body {
   background: #646464;
-}
+} */
 </style>

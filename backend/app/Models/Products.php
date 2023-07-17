@@ -20,4 +20,8 @@ class Products extends Model
     public function models() {
         return $this->belongsTo(Models::class);
     }
+
+    public function cartProducts() {
+        return $this->hasOne(Cart::class);
+    }
 }

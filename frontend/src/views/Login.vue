@@ -16,7 +16,10 @@ function login() {
         .then(async (response) => {    
             email.value = ''
             password.value = ''
-            loggedInMessage.value = true
+            loggedInMessage.value = TextTrackCue
+            
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+            localStorage.setItem('token', response.data.token)
 
             setTimeout(() => {
                 loggedInMessage.value = false
@@ -60,7 +63,8 @@ function login() {
                 <p>Login error. Check the entered data.</p>
             </div>
         </div>
-        
+
+        <div class="link">Or create <span @click="router.push('/register')">a new account</span></div>        
     </main>
 </template>
 
@@ -139,5 +143,16 @@ function login() {
         font-style: normal;
         font-weight: 400;
         margin-top: 5px;
+    }
+
+    .link {
+        color: #5A3015;
+        font-size: 32px;
+        margin-top: 30px;
+    }
+
+    .link > span:hover {
+        cursor: pointer;
+        color: rgba(255, 102, 0, 0.911);
     }
 </style>

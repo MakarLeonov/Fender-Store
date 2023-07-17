@@ -7,6 +7,15 @@ import axios from 'axios'
 
 export const ProductsStore = defineStore('products', () => {
 
+    // USER
+    const user = ref({})
+    const token = ref('')
+
+    function serUser() {
+        user.value = JSON.parse(localStorage.user)
+        token.value = localStorage.token
+    }
+
     // PRODUCTS
     const productList = ref([])
 
@@ -41,18 +50,20 @@ export const ProductsStore = defineStore('products', () => {
         }
     }
 
+    // CART
+    const cart = ref([])
+
+    const getCart = async () => {
+        axios.post('http://127.0.0.1:8000/api/get_products', {
+            user_id: JSON.parse(localStorage.user).id
+        })
+            .then((response) => {
+                cart.value = response.data.data
+                console.log(response.data.data)
+            })
+            .catch((error) => {console.log(error)})
+    }
 
 
-    // COLORS
-    const colors = ref(['All '])
-
-
-
-
-
-    
-
-
-
-    return { productList, getProducts, getTypes, types, getModels, models }
+    return { productList, getProducts, getTypes, types, getModels, models, user, token, serUser, cart, getCart}
 })
